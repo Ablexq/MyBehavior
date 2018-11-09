@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyBehavior</string>
+
+
+    <string name="demo1_behavior" >com.dch.mybehavior.demo1.DependentBehavior</string>
+    <string name="demo2_behavior" >com.dch.mybehavior.demo2.ScrollBehavior</string>
+    <string name="demo3_behavior" >com.dch.mybehavior.demo3.TitleBehavior</string>
+
+
+    <string name="demo5_behavior1" >com.dch.mybehavior.demo5.behavior.FabFadeBehavior</string>
+    <string name="demo5_behavior2" >com.dch.mybehavior.demo5.behavior.FabScrollAwareFABBehavior</string>
+    <string name="demo5_behavior3" >com.dch.mybehavior.demo5.behavior.RotateBehavior</string>
+</resources>
