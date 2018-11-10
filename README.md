@@ -139,7 +139,9 @@ AppBarLayout的【直接子控件】可以设置的属性:layout_scrollFlags （
 代码中：
 
 ```
-  params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | 
+                      AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 ```
 
 
