@@ -37,10 +37,10 @@ public class Demo4Activity extends BaseActivity {
 
         ArrayList<String> list = new ArrayList<>();
         list.add("不设置：固定，不会变化");
-        list.add("scroll|enterAlways：即时跟随上下");
+        list.add("scroll|enterAlways：即时上, 即时下");
         list.add("scroll|snap：即时上，下来时需要滚动见顶才可以，不超过一半返回原位");
         list.add("scroll|enterAlwaysCollapsed：即时上，下来时需要滚动见顶才可以");
-        list.add("scroll|exitUntilCollapsed：即时上，下来时需要滚动见顶才可以，但会保持最小高度不变");
+        list.add("scroll|exitUntilCollapsed：即时上，但会保持最小高度不变，下来时需要滚动见顶才可以");
         MyAdapter myAdapter = new MyAdapter(R.layout.main_item, list);
         recyclerview.setAdapter(myAdapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));

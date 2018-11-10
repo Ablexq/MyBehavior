@@ -67,35 +67,74 @@ CoordinatorLayout 继承自viewgroup,但是使用类似于framLayout,有层次�
 # 五种layout_scrollFlags
 
 ```
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/main_appbarlayout"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/main_toolbar"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="200dip"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:title="@string/app_name" />
+            android:layout_height="match_parent"
+            app:contentScrim="#00ffffff"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@mipmap/ic_launcher"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitXY"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:text="Hello World"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        app:layout_behavior="@string/demo3_behavior" />
 
-    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
 
 ```
+AppBarLayout继承自LinearLayout，布局方向为垂直方向。
+
+AppBarLayout响应了CoordinatorLayout的layout_behavior属性
+
+AppBarLayout的【直接子控件】可以设置的属性:layout_scrollFlags （是否可响应滑动）
+
+> 不设置：                       固定，不会变化
+
+> scroll|enterAlways：           即时上, 即时下
+
+> scroll|snap：                  即时上，下来时需要滚动见顶才可以，不超过一半返回原位
+
+> scroll|enterAlwaysCollapsed：  即时上，下来时需要滚动见顶才可以
+
+> scroll|exitUntilCollapsed：    即时上，但会保持最小高度不变，下来时需要滚动见顶才可以
+
 
 代码中：
 
