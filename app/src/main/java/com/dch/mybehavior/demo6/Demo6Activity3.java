@@ -148,22 +148,5 @@ public class Demo6Activity3 extends BaseActivity {
         textView = (TextView) findViewById(R.id.user_name);
 
         setSupportActionBar(toolbar);
-        //启用HomeAsUp按钮，也就是回退键
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
-
-    //处理HomeAsUp回退按钮的点击事件
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

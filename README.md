@@ -4,7 +4,7 @@
 [CoordinatorLayout高级用法-自定义Behavior](https://blog.csdn.net/qibin0506/article/details/50290421)
 
 
-# 一、CoordinatorLayout【直接子控件】的自定义behavior
+# **一、CoordinatorLayout【直接子控件】的自定义behavior**
 
 ### 方式一：某个view监听另一个view的状态变化，例如大小、位置、显示状态等
 
@@ -64,7 +64,7 @@ CoordinatorLayout 继承自viewgroup,但是使用类似于framLayout,有层次�
 参见：[demo3](https://github.com/Ablexq/MyBehavior/blob/master/app/src/main/java/com/dch/mybehavior/demo3/TitleBehavior.java)
 
 
-# 二、AppBarLayout【直接子控件】的五种layout_scrollFlags
+# **二、AppBarLayout【直接子控件】的五种layout_scrollFlags**
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -146,18 +146,6 @@ AppBarLayout的【直接子控件】可以设置的属性:layout_scrollFlags （
 [android Material Design 学习之六：AppBarLayout](https://blog.csdn.net/dhl_1986/article/details/80269007)
 
 
-### CollapsingToolbarLayout
-
-```
-app:contentScrim="?attr/colorPrimary"
-//设置当完全CollapsingToolbarLayout折叠(收缩)后的背景颜色。默认contentScrim是colorPrimary的色值
-app:statusBarScrim="@android:color/transparent"
-//设置当完全CollapsingToolbarLayout折叠(收缩)后的状态栏颜色。默认contentScrim是colorPrimaryDark的色值
-
-app:expandedTitleMarginStart="48dp"
-//设置扩张时候(还没有收缩时)title向左填充的距离。
-```
-
 ### 代码中设置layout_scrollFlags：
 
 ```
@@ -173,7 +161,7 @@ app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 ```
 
 
-# 三、CollapsingToolbarLayout【直接子布局】的2种折叠模式
+# **三、CollapsingToolbarLayout【直接子布局】的2种折叠模式**
 
 ```
 public class CollapsingToolbarLayout extends FrameLayout {...}
@@ -208,6 +196,18 @@ collapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
 //标题颜色
 collapsingToolbarLayout.setExpandedTitleColor(Color.BLUE);//扩张颜色
 collapsingToolbarLayout.setCollapsedTitleTextColor(Color.YELLOW);//折叠颜色
+```
+
+### CollapsingToolbarLayout
+
+```
+app:contentScrim="?attr/colorPrimary"
+//设置当完全CollapsingToolbarLayout折叠(收缩)后的背景颜色。默认contentScrim是colorPrimary的色值
+app:statusBarScrim="@android:color/transparent"
+//设置当完全CollapsingToolbarLayout折叠(收缩)后的状态栏颜色。默认contentScrim是colorPrimaryDark的色值
+
+app:expandedTitleMarginStart="48dp"
+//设置扩张时候(还没有收缩时)title向左填充的距离。
 ```
 
 # FloatingActionButton及其Behavior的使用
