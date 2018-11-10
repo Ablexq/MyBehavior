@@ -4,7 +4,7 @@
 [CoordinatorLayout高级用法-自定义Behavior](https://blog.csdn.net/qibin0506/article/details/50290421)
 
 
-# 自定义behavior
+# 一、CoordinatorLayout【直接子控件】的自定义behavior
 
 ### 方式一：某个view监听另一个view的状态变化，例如大小、位置、显示状态等
 
@@ -53,7 +53,7 @@ public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, Vi
 
 
 
-# CoordinatorLayout
+### CoordinatorLayout
 
 CoordinatorLayout 继承自viewgroup,但是使用类似于framLayout,有层次结构,后面的布局会覆盖在前面的布局之上,
 
@@ -61,10 +61,10 @@ CoordinatorLayout 继承自viewgroup,但是使用类似于framLayout,有层次�
 
 注意：app:layout_behavior属性,只有CoordinatorLayout的直接子布局才能响应
 
-参见：demo3
+参见：[demo3](https://github.com/Ablexq/MyBehavior/blob/master/app/src/main/java/com/dch/mybehavior/demo3/TitleBehavior.java)
 
 
-# 五种layout_scrollFlags
+# 二、AppBarLayout【直接子控件】的五种layout_scrollFlags
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -121,22 +121,44 @@ CoordinatorLayout 继承自viewgroup,但是使用类似于framLayout,有层次�
 ```
 AppBarLayout继承自LinearLayout，布局方向为垂直方向。
 
+AppBarLayout 就是实现了MD风格的滚动手势的LinearLayout。
+
 AppBarLayout响应了CoordinatorLayout的layout_behavior属性
 
 AppBarLayout的【直接子控件】可以设置的属性:layout_scrollFlags （是否可响应滑动）
 
-> 不设置：                       固定，不会变化
+> 不设置：固定，不会变化
 
-> scroll|enterAlways：           即时上, 即时下
+> scroll|enterAlways：即时上, 即时下（下滑时，先toolbar再RecyclerView）
 
-> scroll|snap：                  即时上，下来时需要滚动见顶才可以，不超过一半返回原位
+> scroll|snap：即时上，下来时需要滚动见顶才可以，如果视图只有底部25%显示，它将折叠。相反，如果它的底部75%可见，那么它将完全展开。
 
-> scroll|enterAlwaysCollapsed：  即时上，下来时需要滚动见顶才可以
+> scroll|enterAlwaysCollapsed：即时上，下来时需要滚动见顶才可以
 
-> scroll|exitUntilCollapsed：    即时上，但会保持最小高度不变，下来时需要滚动见顶才可以
+> scroll|exitUntilCollapsed：即时上，但会保持最小高度不变，下来时需要滚动见顶才可以
+
+> scroll：即时上, 即时下(类似拼接的头部, 下滑时，RecyclerView与Toolbar同时进行)
+
+> scroll|enterAlways|enterAlwaysCollapsed：即时上, 向下滑动时，先滑动到最小值，然后RecyclerView 开始滑动，到达边界时，ToolBar在向下滑动。
+
+参考：
+
+[android Material Design 学习之六：AppBarLayout](https://blog.csdn.net/dhl_1986/article/details/80269007)
 
 
-代码中：
+### CollapsingToolbarLayout
+
+```
+app:contentScrim="?attr/colorPrimary"
+//设置当完全CollapsingToolbarLayout折叠(收缩)后的背景颜色。默认contentScrim是colorPrimary的色值
+app:statusBarScrim="@android:color/transparent"
+//设置当完全CollapsingToolbarLayout折叠(收缩)后的状态栏颜色。默认contentScrim是colorPrimaryDark的色值
+
+app:expandedTitleMarginStart="48dp"
+//设置扩张时候(还没有收缩时)title向左填充的距离。
+```
+
+### 代码中设置layout_scrollFlags：
 
 ```
 AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
@@ -144,9 +166,76 @@ params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL |
                       AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 ```
 
+注意：layout_scrollFlags可以多个结合使用：
+```
+app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+```
+
+
+# 三、CollapsingToolbarLayout【直接子布局】的2种折叠模式
+
+```
+public class CollapsingToolbarLayout extends FrameLayout {...}
+```
+
+layout_collapseMode (折叠模式) - 有两个值:
+
+```
+app:layout_collapseMode="parallax"
+//设置为这个模式时，在内容滚动时，CollapsingToolbarLayout中的View（比如ImageView)也可以同时滚动，实现视差滚动效果，
+//（常用于图片/轮播图）
+//通常和layout_collapseParallaxMultiplier(设置视差因子)搭配使用。
+//app:layout_collapseParallaxMultiplier="0.7"
+//设置视差滚动因子，值为：0~1。
+
+app:layout_collapseMode="pin"
+//pin设置为这个模式时，当CollapsingToolbarLayout完全收缩后，Toolbar还可以保留在屏幕上。
+//(常用于toolbar)
+```
+
+注意：使用CollapsingToolbarLayout时必须把title设置到CollapsingToolbarLayout上，设置到Toolbar上不会显示。
+
+```
+//当CollapsingToolbarLayout完全折叠后的背景颜色
+collapsingToolbarLayout.setContentScrimColor(Color.RED);
+//当CollapsingToolbarLayout完全折叠后状态栏颜色
+collapsingToolbarLayout.setStatusBarScrimColor(Color.RED);
+//默认contentScrim是colorPrimary的色值，statusBarScrim是colorPrimaryDark的色值。
+
+//文字
+collapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
+//标题颜色
+collapsingToolbarLayout.setExpandedTitleColor(Color.BLUE);//扩张颜色
+collapsingToolbarLayout.setCollapsedTitleTextColor(Color.YELLOW);//折叠颜色
+```
 
 # FloatingActionButton及其Behavior的使用
 
 https://blog.csdn.net/wei_smile/article/details/51375170
 
 https://blog.csdn.net/gdutxiaoxu/article/details/53453958
+
+# toolbar
+
+```
+//设置返回按钮
+getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

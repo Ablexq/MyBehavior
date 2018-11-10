@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TabLayoutStyle" parent="android:Widget">
+        <item name="tabBackground">@drawable/tab_backgroud</item>
+        <item name="tabIndicatorColor">#000000</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabSelectedTextColor">#0000ff</item>
+        <item name="tabTextColor">#ff0000</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>

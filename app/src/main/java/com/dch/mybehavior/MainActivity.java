@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity {
         list.add("标题渐变隐藏");
         list.add("五种layout_scrollFlags");
         list.add("demo5");
-        list.add("demo6");
+        list.add("三种layout_collapseMode");
         MyAdapter myAdapter = new MyAdapter(R.layout.main_item, list);
         recyclerview.setAdapter(myAdapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));

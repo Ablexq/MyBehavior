@@ -37,10 +37,12 @@ public class Demo4Activity extends BaseActivity {
 
         ArrayList<String> list = new ArrayList<>();
         list.add("不设置：固定，不会变化");
-        list.add("scroll|enterAlways：即时上, 即时下");
-        list.add("scroll|snap：即时上，下来时需要滚动见顶才可以，不超过一半返回原位");
+        list.add("scroll|enterAlways：即时上, 即时下（下滑时，先toolbar再RecyclerView）");
+        list.add("scroll|snap：即时上，下来时需要滚动见顶才可以，如果视图只有底部25%显示，它将折叠。相反，如果它的底部75%可见，那么它将完全展开。");
         list.add("scroll|enterAlwaysCollapsed：即时上，下来时需要滚动见顶才可以");
         list.add("scroll|exitUntilCollapsed：即时上，但会保持最小高度不变，下来时需要滚动见顶才可以");
+        list.add("scroll：即时上, 即时下(类似拼接的头部)");
+        list.add("scroll|enterAlways|enterAlwaysCollapsed：即时上, 向下滑动时，先滑动到最小值，然后RecyclerView 开始滑动，到达边界时，ToolBar在向下滑动。");
         MyAdapter myAdapter = new MyAdapter(R.layout.main_item, list);
         recyclerview.setAdapter(myAdapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -63,6 +65,12 @@ public class Demo4Activity extends BaseActivity {
                         break;
                     case 4:
                         toDetail(Demo4Activity5.class);
+                        break;
+                    case 5:
+                        toDetail(Demo4Activity6.class);
+                        break;
+                    case 6:
+                        toDetail(Demo4Activity7.class);
                         break;
                 }
             }
