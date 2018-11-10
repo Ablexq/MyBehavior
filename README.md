@@ -8,7 +8,7 @@
 
 ### 方式一：某个view监听另一个view的状态变化，例如大小、位置、显示状态等
 
-关注：layoutDependsOn 和 onDependentViewChanged 方法，请见demo1
+关注：layoutDependsOn 和 onDependentViewChanged 方法，请见[demo1](https://github.com/Ablexq/MyBehavior/blob/master/app/src/main/java/com/dch/mybehavior/demo1/DependentBehavior.java)
 ```
 /*
 * 确定使用Behavior的View要依赖的View的类型
@@ -30,7 +30,7 @@ public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View
 
 ### 方式二：某个view监听CoordinatorLayout里的滑动状态
 
-关注：onStartNestedScroll 和 onNestedPreScroll 方法。请见demo2
+关注：onStartNestedScroll 和 onNestedPreScroll 方法。请见[demo2](https://github.com/Ablexq/MyBehavior/blob/master/app/src/main/java/com/dch/mybehavior/demo2/ScrollBehavior.java)
 ```
 //嵌套滑动开始（ACTION_DOWN），确定Behavior是否要监听此次事件
 @Override
@@ -59,7 +59,7 @@ CoordinatorLayout 继承自viewgroup,但是使用类似于framLayout,有层次�
 
 但跟behavior属性也有很大关系的，
 
-app:layout_behavior属性,只有CoordinatorLayout的直接子布局才能响应
+注意：app:layout_behavior属性,只有CoordinatorLayout的直接子布局才能响应
 
 参见：demo3
 
