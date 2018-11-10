@@ -6,10 +6,10 @@
 
 # 自定义behavior
 
-### 某个view监听另一个view的状态变化，例如大小、位置、显示状态等
+### 方式一：某个view监听另一个view的状态变化，例如大小、位置、显示状态等
 
 关注：layoutDependsOn 和 onDependentViewChanged 方法，请见demo1
-
+```
 /*
 * 确定使用Behavior的View要依赖的View的类型
 * parant     代表CoordinatorLayout，
@@ -26,12 +26,12 @@ public boolean layoutDependsOn(CoordinatorLayout parent, View child, View depend
 public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
     return super.onDependentViewChanged(parent, child, dependency);
 }
+```
 
-
-### 某个view监听CoordinatorLayout里的滑动状态
+### 方式二：某个view监听CoordinatorLayout里的滑动状态
 
 关注：onStartNestedScroll 和 onNestedPreScroll 方法。请见demo2
-
+```
 //嵌套滑动开始（ACTION_DOWN），确定Behavior是否要监听此次事件
 @Override
 public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View child, View directTargetChild, View target, int nestedScrollAxes) {
@@ -49,7 +49,7 @@ public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, View child, V
 public boolean onNestedFling(CoordinatorLayout coordinatorLayout, View child, View target, float velocityX, float velocityY, boolean consumed) {
     return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
 }
-
+```
 
 
 
