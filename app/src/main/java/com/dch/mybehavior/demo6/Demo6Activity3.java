@@ -86,17 +86,17 @@ public class Demo6Activity3 extends BaseActivity {
              * */
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
+                if (verticalOffset == 0) {//展开
                     if (state != CollapsingToolbarLayoutState.EXPANDED) {
                         textView.setShadowLayer(10, 5, 5, Color.BLACK);//展开设置阴影
                         state = CollapsingToolbarLayoutState.EXPANDED;//修改状态标记为展开
                     }
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {//折叠
                     if (state != CollapsingToolbarLayoutState.COLLAPSED) {
                         textView.setShadowLayer(0, 0, 0, Color.BLACK);//折叠取消阴影
                         state = CollapsingToolbarLayoutState.COLLAPSED;//修改状态标记为折叠
                     }
-                } else {
+                } else {//中间
                     if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
                         if (state == CollapsingToolbarLayoutState.COLLAPSED) {
                             textView.setShadowLayer(0, 0, 0, Color.BLACK);//中间到展开取消阴影

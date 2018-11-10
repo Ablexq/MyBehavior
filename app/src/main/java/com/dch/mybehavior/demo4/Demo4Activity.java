@@ -9,14 +9,8 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dch.mybehavior.BaseActivity;
-import com.dch.mybehavior.MainActivity;
 import com.dch.mybehavior.MyAdapter;
 import com.dch.mybehavior.R;
-import com.dch.mybehavior.demo1.Demo1Activity;
-import com.dch.mybehavior.demo2.Demo2Activity;
-import com.dch.mybehavior.demo3.Demo3Activity;
-import com.dch.mybehavior.demo5.Demo5Activity;
-import com.dch.mybehavior.demo6.Demo6Activity;
 
 import java.util.ArrayList;
 

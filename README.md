@@ -3,6 +3,7 @@
 
 [CoordinatorLayout高级用法-自定义Behavior](https://blog.csdn.net/qibin0506/article/details/50290421)
 
+[看，这个工具栏能伸缩折叠——Android CollapsingToolbarLayout使用介绍](https://www.jianshu.com/p/06c0ae8d9a96/)
 
 # **一、CoordinatorLayout【直接子控件】的自定义behavior**
 
@@ -129,7 +130,7 @@ AppBarLayout的【直接子控件】可以设置的属性:layout_scrollFlags （
 
 > 不设置：固定，不会变化
 
-> scroll|enterAlways：即时上, 即时下（下滑时，先toolbar再RecyclerView）
+> scroll|enterAlways：即时上, 即时下（下滑时，先toolbar再RecyclerView）,向下的滚动都会导致该view变为可见，启用快速“返回模式”
 
 > scroll|snap：即时上，下来时需要滚动见顶才可以，如果视图只有底部25%显示，它将折叠。相反，如果它的底部75%可见，那么它将完全展开。
 
@@ -175,7 +176,7 @@ app:layout_collapseMode="parallax"
 //（常用于图片/轮播图）
 //通常和layout_collapseParallaxMultiplier(设置视差因子)搭配使用。
 //app:layout_collapseParallaxMultiplier="0.7"
-//设置视差滚动因子，值为：0~1。
+//设置视差滚动因子，值为：0~1。值越大视察越大。
 
 app:layout_collapseMode="pin"
 //pin设置为这个模式时，当CollapsingToolbarLayout完全收缩后，Toolbar还可以保留在屏幕上。
@@ -183,6 +184,11 @@ app:layout_collapseMode="pin"
 ```
 
 注意：使用CollapsingToolbarLayout时必须把title设置到CollapsingToolbarLayout上，设置到Toolbar上不会显示。
+
+使用CollapsingToolbarLayout实现折叠效果，需要注意3点 
+1. AppBarLayout的高度固定 
+2. CollapsingToolbarLayout的子视图设置layout_collapseMode属性 
+3. 关联悬浮视图设置app:layout_anchor，app:layout_anchorGravity属性
 
 ```
 //当CollapsingToolbarLayout完全折叠后的背景颜色
@@ -210,7 +216,7 @@ app:expandedTitleMarginStart="48dp"
 //设置扩张时候(还没有收缩时)title向左填充的距离。
 ```
 
-# FloatingActionButton及其Behavior的使用
+# FloatingActionButton 及其Behavior的使用
 
 https://blog.csdn.net/wei_smile/article/details/51375170
 
@@ -220,11 +226,24 @@ https://blog.csdn.net/gdutxiaoxu/article/details/53453958
 
 ```
 //设置返回按钮
-getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+setSupportActionBar(toolbar);
+//启用HomeAsUp按钮，也就是回退键
+ActionBar actionBar = getSupportActionBar();
+if (actionBar != null) {
+    actionBar.setDisplayHomeAsUpEnabled(true);
+}
+
+//处理HomeAsUp回退按钮的点击事件
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+        case android.R.id.home:
+            finish();
+            return true;
+    }
+    return super.onOptionsItemSelected(item);
+}
 ```
-
-
-
 
 
 

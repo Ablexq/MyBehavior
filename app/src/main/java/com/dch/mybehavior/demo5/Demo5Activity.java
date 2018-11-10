@@ -1,113 +1,69 @@
 package com.dch.mybehavior.demo5;
 
-import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.dch.mybehavior.BaseActivity;
 import com.dch.mybehavior.MyAdapter;
 import com.dch.mybehavior.R;
+import com.dch.mybehavior.demo4.Demo4Activity1;
+import com.dch.mybehavior.demo4.Demo4Activity2;
+import com.dch.mybehavior.demo4.Demo4Activity3;
+import com.dch.mybehavior.demo4.Demo4Activity4;
+import com.dch.mybehavior.demo4.Demo4Activity5;
+import com.dch.mybehavior.demo4.Demo4Activity6;
+import com.dch.mybehavior.demo4.Demo4Activity7;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class Demo5Activity extends BaseActivity {
 
-    private RecyclerView recyclerView;
-    private FloatingActionButton fab;
-    private CoordinatorLayout mCoor;
-    private TextView hide;
-    //判断是否打开
-    private boolean isOpen = false;
-    private ArrayList<String> lists = new ArrayList<>();
+    @BindView(R.id.recyclerview)
+    RecyclerView recyclerview;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.demo5_layout);
+        ButterKnife.bind(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.mRecycleView);
-        mCoor = (CoordinatorLayout) findViewById(R.id.coor);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        hide = (TextView) findViewById(R.id.hide);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("简单示例");
+        list.add("仿知乎");
 
-        // 线性布局
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        String[] mTitles = getResources().getStringArray(R.array.titles);
-        for (String mTitle : mTitles) {
-            lists.add(mTitle);
-            recyclerView.setAdapter(new MyAdapter(R.layout.main_item, lists));
-        }
+        MyAdapter myAdapter = new MyAdapter(R.layout.main_item, list);
+        recyclerview.setAdapter(myAdapter);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this));
 
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        myAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                /**
-                 * SnackBar结合RotateBehavior使用
-                 */
-//                Snackbar.make(mCoor,"FAB", Snackbar.LENGTH_SHORT)
-//                        .setAction("UNDO", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//
-//                            }
-//                        })
-//                        .show();
-                if (!isOpen) {
-                    turnLeft(v);
-                } else {
-                    turnRight(v);
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (position) {
+                    case 0:
+                        toDetail(Demo5Activity1.class);
+                        break;
+
+                    case 1:
+                        toDetail(Demo5Activity2.class);
+                        break;
                 }
             }
         });
-        hide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                turnRight(fab);
-            }
-        });
-
     }
 
-    //开始旋转
-    public void turnLeft(View v) {
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(v, "rotation", 0, -155, -135);
-        objectAnimator.setDuration(300);
-        objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        objectAnimator.start();
-        hide.setVisibility(View.VISIBLE);
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 0.75f);
-        alphaAnimation.setDuration(300);
-        alphaAnimation.setFillAfter(true);
-        hide.startAnimation(alphaAnimation);
-        hide.setClickable(true);
-        isOpen = true;
+    private void toDetail(Class<?> cls) {
+        final Intent intent = new Intent();
+        intent.setClass(this, cls);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
-
-    //回到起始位置
-    public void turnRight(View v) {
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(v, "rotation", -135, 20, 0);
-        objectAnimator.setDuration(300);
-        objectAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-        objectAnimator.start();
-        hide.setVisibility(View.GONE);
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.75f, 0);
-        alphaAnimation.setDuration(300);
-        alphaAnimation.setFillAfter(true);
-        hide.startAnimation(alphaAnimation);
-        hide.setClickable(false);
-        isOpen = false;
-    }
-
 }

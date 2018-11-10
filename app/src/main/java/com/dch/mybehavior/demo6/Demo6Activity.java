@@ -30,7 +30,7 @@ public class Demo6Activity extends BaseActivity {
         ButterKnife.bind(this);
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("简单示例");
+        list.add("parallax和pin的简单示例");
         list.add("结合tablayout+viewpager(View)");
         list.add("结合tablayout+viewpager(fragment)");
         list.add("pin：即时上，下来时需要滚动见顶才可以，不超过一半返回原位");

@@ -33,6 +33,8 @@
         <activity android:name=".demo4.Demo4Activity7" />
         <!---->
         <activity android:name=".demo5.Demo5Activity" />
+        <activity android:name=".demo5.Demo5Activity1" />
+        <activity android:name=".demo5.Demo5Activity2" />
         <!---->
         <activity android:name=".demo6.Demo6Activity" />
         <activity android:name=".demo6.Demo6Activity1" />
